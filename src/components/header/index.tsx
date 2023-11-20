@@ -14,7 +14,7 @@ function Header() {
                 <li>+180-123-4567</li>
                 <li>info@demo.com</li>
                 <li>
-                  <a href="#">Help</a>s
+                  <Link to="#">Help</Link>
                 </li>
               </ul>
             </div>
@@ -85,32 +85,32 @@ function Header() {
                     <div id="menu-button">Menu</div>
                     <ul style={{ display: "block" }}>
                       <li className="active">
-                        <a href="index.html">Home</a>
+                        <Link to="/">Home</Link>
                       </li>
                       <li className="has-sub">
                         <span className="submenu-button"></span>
-                        <a href="#">Mobiles</a>
+                        <Link to="#">Categories</Link>
                         <ul style={{ display: "block" }}>
                           <li>
-                            <a href="product-list.html">Mobile List</a>
+                            <Link to="product-list.html">Mobile List</Link>
                           </li>
                           <li>
-                            <a href="product-single.html">Mobile Single </a>
+                            <Link to="product-single.html">Mobile Single </Link>
                           </li>
                         </ul>
                       </li>
                       <li>
-                        <a href="about.html">About</a>
+                        <Link to="about.html">About</Link>
                       </li>
                       <li className="has-sub">
                         <span className="submenu-button"></span>
-                        <a href="#">Pages</a>
+                        <Link to="#">Pages</Link>
                         <ul style={{ display: "block" }}>
                           <li>
-                            <a href="checkout.html">Checkout Form</a>
+                            <Link to="checkout.html">Checkout Form</Link>
                           </li>
                           <li>
-                            <a href="cart.html">Cart</a>{" "}
+                            <Link to="cart.html">Cart</Link>{" "}
                           </li>
                           <li>
                             <Link to="login">Login</Link>{" "}
@@ -119,30 +119,30 @@ function Header() {
                             <Link to="register">Register</Link>{" "}
                           </li>
                           <li>
-                            <a href="404-page.html">404-page</a>{" "}
+                            <Link to="404-page.html">404-page</Link>{" "}
                           </li>
                           <li>
-                            <a href="styleguide.html">styleguide</a>{" "}
+                            <Link to="styleguide.html">styleguide</Link>{" "}
                           </li>
                         </ul>
                       </li>
                       <li className="has-sub">
                         <span className="submenu-button"></span>
-                        <a href="#">Blog</a>
+                        <Link to="#">Blog</Link>
                         <ul style={{ display: "block" }}>
                           <li>
-                            <a href="blog-default.html">Blog Default</a>
+                            <Link to="blog-default.html">Blog Default</Link>
                           </li>
                           <li>
-                            <a href="blog-single.html">Blog Single</a>
+                            <Link to="blog-single.html">Blog Single</Link>
                           </li>
                         </ul>
                       </li>
                       <li>
-                        <a href="contact-us.html">Contact Us</a>
+                        <Link to="contact-us.html">Contact Us</Link>
                       </li>
                       <li>
-                        <a href="template-feature.html">Template Feature</a>
+                        <Link to="template-feature.html">Template Feature</Link>
                       </li>
                     </ul>
                   </div>
