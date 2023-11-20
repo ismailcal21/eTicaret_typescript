@@ -5,6 +5,7 @@ import Footer from "./components/footer";
 import HomePage from "./pages/home-page";
 import Login from "./pages/home-page/login";
 import Register from "./pages/home-page/register";
+import Cart from "./pages/cart";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="cart" element={<Cart />} />
         </Routes>
         <Footer />
       </BrowserRouter>

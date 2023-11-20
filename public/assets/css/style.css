@@ -736,6 +736,7 @@ h5 { font-size: 14px; color: #1c1e1e; text-transform: uppercase; line-height: 1;
 .box-head { background-color: #ffffff; border-bottom: 1px solid #f3f5f7 }
 .head-title { padding: 16px 30px; margin-bottom: 0px; }
 .box-body { background-color: #e9c3c3; border-radius: 20px; padding: 30px; margin: 30px; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; }
+.box-body2 { background-color: #fff; border-radius: 20px; padding: 30px; margin: 30px; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; }
 .box-info { font-size: 16px; line-height: 1.6; }
 .circle-default-color { background-color: #0cafe5; height: 162px; width: 162px; border-radius: 50%; border: 5px solid #51c4ea; }
 .circle-primary-color { background-color: #fb730f; height: 162px; width: 162px; border-radius: 50%; border: 5px solid #f99a54; }
@@ -748,7 +749,7 @@ h5 { font-size: 14px; color: #1c1e1e; text-transform: uppercase; line-height: 1;
 .altenate { }
 .altenate ul { list-style: none; }
 .altenate ul li { border-bottom: 1px solid #e8ecf0; line-height: 2.5; }
-.box-table { padding: 16px 30px; margin: 0 -15px 15px; border-color:; border: 1px solid #dbdad8; }
+.box-table { padding: 16px 30px; margin: 0 -15px 15px;  border: 1px solid #dbdad8; }
 .box-title { font-size: 14px; font-weight: 400; text-transform: uppercase; margin-top: 20px; margin-bottom: 0px; letter-spacing: 1px; }
 
 /*-------------------------
