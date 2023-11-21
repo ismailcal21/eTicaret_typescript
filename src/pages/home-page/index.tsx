@@ -1,18 +1,15 @@
-import { SplideSlide } from "@splidejs/react-splide";
-import Splide from "@splidejs/splide";
-
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
-
 // or other themes
-import "@splidejs/react-splide/css/skyblue";
-import "@splidejs/react-splide/css/sea-green";
+import "@splidejs/react-splide/css";
+import "@splidejs/react-splide/css/skyblue"; // veya başka bir tema
+import "@splidejs/react-splide/css/sea-green"; // veya başka bir tema
 
-// or only core styles
-import "@splidejs/react-splide/css/core";
 import { useEffect } from "react";
 import { ProductType } from "../../types";
 import axios from "axios";
 import { AxiosResponse } from "axios";
+import { images } from "../../data";
 
 // export type optionType = {
 //   perPage: number,
@@ -50,24 +47,19 @@ const HomePage = () => {
         }}
         
       > */}
-      <SplideSlide>
-        <img
-          src="https://ecommerce-template.udemig.dev/images/slider_3.jpg"
-          alt="Image 1"
-        />
-      </SplideSlide>
-      <SplideSlide>
-        <img
-          src="https://ecommerce-template.udemig.dev/images/slider_1.jpg"
-          alt="Image 2"
-        />
-      </SplideSlide>
-      <SplideSlide>
-        <img
-          src="https://ecommerce-template.udemig.dev/images/slider_2.jpg"
-          alt="Image 3"
-        />
-      </SplideSlide>
+
+      <Splide
+        options={{
+          autoHeight: true,
+        }}
+      >
+        {images.map((img) => (
+          <SplideSlide>
+            <img src={img.image} />
+          </SplideSlide>
+        ))}
+      </Splide>
+
       {/* </Splide> */}
     </div>
   );
