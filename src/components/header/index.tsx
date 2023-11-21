@@ -24,9 +24,9 @@ function Header() {
       <div
         id="sticky-wrapper"
         className="sticky-wrapper"
-        style={{ height: "158px" }}
+        style={{ height: "5%" }}
       >
-        <div className="header-wrapper" style={{ width: "1903px" }}>
+        <div className="header-wrapper" style={{ width: "100%" }}>
           <div className="container">
             <div className="row">
               <div className="col-lg-3 col-md-3 col-sm-3 col-xs-8">
@@ -34,7 +34,7 @@ function Header() {
                   <Link to="/">
                     <img
                       src="/assets/images/6.webp"
-                      style={{ width: "100px", height: "80px" }}
+                      style={{ width: "30%", height: "30%" }}
                       alt=""
                     />
                   </Link>
@@ -92,7 +92,7 @@ function Header() {
                         <Link to="#">Categories</Link>
                         <ul style={{ display: "block" }}>
                           <li>
-                            <Link to="product-list.html">Mobile List</Link>
+                            <Link to="products">Products</Link>
                           </li>
                           <li>
                             <Link to="product-single.html">Mobile Single </Link>
