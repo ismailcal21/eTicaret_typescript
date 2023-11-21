@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./components/footer";
 import HomePage from "./pages/home-page";
 import Login from "./login";
-import Register from "./pages/home-page/register";
+import Register from "./register";
 import Cart from "./pages/cart";
 import ProductsPage from "./pages/home-page/ProductsPage";
 
