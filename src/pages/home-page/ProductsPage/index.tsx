@@ -251,13 +251,20 @@ const ProductsPage = () => {
                 </div>
               </div>
               <div className="row">
-                <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30">
-                  {data ? (
-                    <>
-                      {data.products.map((product, index) => (
-                        <div className="product-block" key={index}>
+                {data ? (
+                  <>
+                    {data.products.slice(0, 10).map((product, index) => (
+                      <div
+                        className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30"
+                        key={index}
+                      >
+                        <div className="product-block">
                           <div className="product-img">
-                            <img src={product.images[0]} alt="" />
+                            <img
+                              src={product.images[2]}
+                              style={{ height: "100%", width: "100%" }}
+                              alt=""
+                            />
                           </div>
                           <div className="product-content">
                             <h5>
@@ -284,12 +291,12 @@ const ProductsPage = () => {
                             </div>
                           </div>
                         </div>
-                      ))}
-                    </>
-                  ) : (
-                    <p>Loading...</p>
-                  )}
-                </div>
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  <p>Loading...</p>
+                )}
               </div>
               <div className="row">
                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
