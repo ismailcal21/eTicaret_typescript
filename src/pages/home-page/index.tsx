@@ -10,7 +10,6 @@ import { ProductType } from "../../types";
 import axios from "axios";
 import { AxiosResponse } from "axios";
 import { images } from "../../data";
-
 // export type optionType = {
 //   perPage: number,
 //   arrows: boolean,

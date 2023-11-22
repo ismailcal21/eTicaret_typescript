@@ -6,18 +6,23 @@ import { AxiosResponse } from "axios";
 import ProductPageComponent from "./components";
 
 const ProductsPage = () => {
-  const [products, setProducts] = useState<ProductType[]>([]);
+  const [data, setData] = useState<ProductType | null>(null);
+
   useEffect(() => {
-    axios
-      .get<ProductType[]>("https://dummyjson.com/products")
-      .then((response: AxiosResponse<ProductType[], any>) => {
-        console.log("Products", response.data);
-        setProducts(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const fetchData = async () => {
+      try {
+        const response = await axios.get<ProductType>(
+          "https://dummyjson.com/products"
+        );
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
+
   return (
     <>
       <div className="content">
@@ -246,17 +251,45 @@ const ProductsPage = () => {
                 </div>
               </div>
               <div className="row">
-                {/* {products.map((product: ProductType, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30"
-                    >
-                      <ProductPageComponent  />
-                    </div>
-                  );
-                })} */}
-                <ProductPageComponent />
+                <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30">
+                  {data ? (
+                    <>
+                      {data.products.map((product, index) => (
+                        <div className="product-block" key={index}>
+                          <div className="product-img">
+                            <img src={product.images[0]} alt="" />
+                          </div>
+                          <div className="product-content">
+                            <h5>
+                              <a href="#" className="product-title">
+                                <strong>{product.brand}</strong>
+                              </a>
+                            </h5>
+                            <div className="product-meta">
+                              <a href="#" className="product-price">
+                                $1200
+                              </a>
+                              <a href="#" className="discounted-price">
+                                $1700
+                              </a>
+                              <span className="offer-price">10%off</span>
+                            </div>
+                            <div className="shopping-btn">
+                              <a href="#" className="product-btn btn-like">
+                                <i className="fa fa-heart"></i>
+                              </a>
+                              <a href="#" className="product-btn btn-cart">
+                                <i className="fa fa-shopping-cart"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </>
+                  ) : (
+                    <p>Loading...</p>
+                  )}
+                </div>
               </div>
               <div className="row">
                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
