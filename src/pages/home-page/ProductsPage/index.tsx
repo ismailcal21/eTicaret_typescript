@@ -4,9 +4,20 @@ import { ProductType } from "../../../types";
 import axios from "axios";
 import { AxiosResponse } from "axios";
 import ProductPageComponent from "./components";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootStateType } from "../../../redux/store";
+import { useDispatch } from "react-redux";
+import { setProducts } from "../../../redux/reducers/productReducer";
 
 const ProductsPage = () => {
+  const dispatch = useDispatch();
+  const productState: ProductType = useSelector((state: RootStateType) => {
+    return state.products;
+  });
+
   const [data, setData] = useState<ProductType | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,6 +26,8 @@ const ProductsPage = () => {
           "https://dummyjson.com/products"
         );
         setData(response.data);
+        console.log("products", response.data);
+        dispatch(setProducts(response.data));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -22,6 +35,14 @@ const ProductsPage = () => {
 
     fetchData();
   }, []);
+
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredProducts = selectedCategory
+    ? data?.products.filter((product) => product.category === selectedCategory)
+    : data?.products;
 
   return (
     <>
@@ -32,205 +53,22 @@ const ProductsPage = () => {
               <div id="cssmenu">
                 <ul>
                   <li className="has-sub">
-                    <a href="#">CATEGORY</a>
-                    <ul>
-                      <li className="even">
-                        <a href="#">Smart Phones</a>
-                      </li>
-                      <li className="odd">
-                        <a href="#">Cell Phones</a>
-                      </li>
-                      <li className="last even">
-                        <a href="#">Android Phones</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="has-sub">
-                    <a href="#">Brand (07)</a>
-                    <ul>
-                      <li className="odd">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">Alcatel</span>
-                        </label>
-                      </li>
-                      <li className="even">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">Apple</span>
-                        </label>
-                      </li>
-                      <li className="odd">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">Google</span>
-                        </label>
-                      </li>
-                      <li className="even">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">HTC</span>
-                        </label>
-                      </li>
-                      <li className="odd">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">Samsung</span>
-                        </label>
-                      </li>
-                      <li className="even">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">Vivo</span>
-                        </label>
-                      </li>
-                      <li className="odd">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">Nexus</span>
-                        </label>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="has-sub">
-                    <a href="#">Price</a>
-                    <ul>
-                      <li className="even">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">500-1000</span>
-                        </label>
-                      </li>
-                      <li className="odd">
-                        <span>
-                          <label>
-                            <input type="checkbox" />
-                            <span className="checkbox-list">1000-2000</span>
-                          </label>
-                        </span>
-                      </li>
-                      <li className="even">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">2000-5000</span>
-                        </label>
-                      </li>
-                      <li className="odd">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">5000-10000</span>
-                        </label>
-                      </li>
-                      <li className="even">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">10000-1800</span>
-                        </label>
-                      </li>
-                      <li className="odd">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">18000-25000</span>
-                        </label>
-                      </li>
-                      <li className="even">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">Above-25000</span>
-                        </label>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="has-sub">
-                    <a href="#">Screen Size</a>
-                    <ul>
-                      <li className="odd">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">3 - 3.9 inches</span>
-                        </label>
-                      </li>
-                      <li className="even">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">4 - 4.9 inches</span>
-                        </label>
-                      </li>
-                      <li className="odd">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">5 - 5.9 inches</span>
-                        </label>
-                      </li>
-                      <li className="even">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">
-                            6 inch &amp; above
-                          </span>
-                        </label>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="has-sub">
-                    <a href="#">PROCESSOR CORES</a>
-                    <ul>
-                      <li className="odd">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">Hexa Core</span>
-                        </label>
-                      </li>
-                      <li className="even">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">Octa Core</span>
-                        </label>
-                      </li>
-                      <li className="odd">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">Quad Core</span>
-                        </label>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="has-sub">
-                    <a href="#">FEATURES</a>
-                    <ul>
-                      <li className="even">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">3G Support</span>
-                        </label>
-                      </li>
-                      <li className="odd">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">4G Support</span>
-                        </label>
-                      </li>
-                      <li className="even">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">Duel Camera</span>
-                        </label>
-                      </li>
-                      <li className="odd">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">
-                            Expandable Memory
-                          </span>
-                        </label>
-                      </li>
-                      <li className="even">
-                        <label>
-                          <input type="checkbox" />
-                          <span className="checkbox-list">FM Radio</span>
-                        </label>
-                      </li>
-                    </ul>
+                    <a onClick={() => handleCategoryClick("smartphones")}>
+                      Smart Phones
+                    </a>
+                    <a onClick={() => handleCategoryClick("fragrances")}>
+                      Fragrances
+                    </a>
+                    <a onClick={() => handleCategoryClick("laptops")}>Laptop</a>
+                    <a onClick={() => handleCategoryClick("home-decoration")}>
+                      Home-decoration
+                    </a>
+                    <a onClick={() => handleCategoryClick("groceries")}>
+                      groceries
+                    </a>
+                    <a onClick={() => handleCategoryClick("skincare")}>
+                      skincare
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -251,10 +89,11 @@ const ProductsPage = () => {
                 </div>
               </div>
               <div className="row">
-                {data ? (
+                {filteredProducts ? (
                   <>
-                    {data.products.slice(0, 10).map((product, index) => (
-                      <div
+                    {filteredProducts.map((product, index) => (
+                      <Link
+                        to={`/productDetail/${product.id}`}
                         className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30"
                         key={index}
                       >
@@ -274,12 +113,12 @@ const ProductsPage = () => {
                             </h5>
                             <div className="product-meta">
                               <a href="#" className="product-price">
-                                $1200
+                                {product.price}
                               </a>
-                              <a href="#" className="discounted-price">
-                                $1700
-                              </a>
-                              <span className="offer-price">10%off</span>
+                              <a href="#" className="discounted-price"></a>
+                              <span className="offer-price">
+                                {product.discountPercentage}off
+                              </span>
                             </div>
                             <div className="shopping-btn">
                               <a href="#" className="product-btn btn-like">
@@ -291,7 +130,7 @@ const ProductsPage = () => {
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </Link>
                     ))}
                   </>
                 ) : (

@@ -21,16 +21,16 @@ import { images } from "../../data";
 // };
 
 const HomePage = () => {
-  useEffect(() => {
-    axios
-      .get<ProductType[]>("https://dummyjson.com/products")
-      .then((response: AxiosResponse<ProductType[], any>) => {
-        console.log("Products", response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get<ProductType[]>("https://dummyjson.com/products")
+  //     .then((response: AxiosResponse<ProductType[], any>) => {
+  //       console.log("Products", response.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   return (
     <div>
@@ -51,10 +51,14 @@ const HomePage = () => {
         options={{
           autoHeight: true,
         }}
+        style={{
+          margin: "auto",
+          textAlign: "center",
+        }}
       >
         {images.map((img) => (
           <SplideSlide>
-            <img src={img.image} />
+            <img src={img.image} style={{ height: "80%", width: "70%" }} />
           </SplideSlide>
         ))}
       </Splide>

@@ -7,6 +7,7 @@ import Login from "./login";
 import Register from "./register";
 import Cart from "./pages/cart";
 import ProductsPage from "./pages/home-page/ProductsPage";
+import ProductDetailsComponent from "./pages/home-page/ProductsPage/components";
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="cart" element={<Cart />} />
           <Route path="products" element={<ProductsPage />} />
+          <Route
+            path="productDetail/:product_id"
+            element={<ProductDetailsComponent />}
+          />
         </Routes>
         <Footer />
       </BrowserRouter>
