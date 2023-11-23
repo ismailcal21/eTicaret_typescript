@@ -390,7 +390,7 @@ img {  max-width: 100%; height: 100%; margin: 0; padding: 0; border: none; line-
 .top-header ul li { float: left; padding: 0px 22px; font-size: 14px; font-weight: 700; color: #ffffff; }
 .top-text { font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 0px; line-height: 30px; }
 .search-bg { position: relative; top: 8px; }
-.search-bg .form-control { height: 52px; }
+.search-bg .form-control { height: 52px; border: 1px solid gray;  }
 .search-bg button { background-color: transparent; border: transparent; color: #ffffff; font-size: 14px; position: absolute; right: 0px; padding: 11px 22px; bottom: 0; }
 .account-section { line-height: 63px; }
 .account-section ul { padding-left: 20px; }
