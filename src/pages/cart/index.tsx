@@ -1,6 +1,10 @@
 import React from "react";
+import { RootStateType } from "../../redux/store";
+import { useSelector } from "react-redux";
 
 const Cart = () => {
+  const cartItems = useSelector((state: RootStateType) => state.cart.items);
+  console.log("cart2", cartItems);
   return (
     <>
       <div className="container">
@@ -31,76 +35,50 @@ const Cart = () => {
                           <th></th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <a href="#">
-                              <img src="images/cart_product_1.png" alt="" />
-                            </a>
-                            <span>
-                              <a href="#">Google Pixle</a>
-                            </span>
-                          </td>
-                          <td>$1100</td>
-                          <td>
-                            <div className="product-quantity">
-                              <div className="quantity">
-                                <input
-                                  type="number"
-                                  className="input-text qty text"
-                                  step="1"
-                                  min="1"
-                                  max="6"
-                                  name="quantity"
-                                  value="1"
-                                  title="Qty"
-                                  pattern="[0-9]*"
-                                />
-                              </div>
-                            </div>
-                          </td>
-                          <td>$1100.00</td>
-                          <th scope="row">
-                            <a href="#" className="btn-close">
-                              <i className="fa fa-times-circle-o"></i>
-                            </a>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>
-                            <a href="#">
-                              <img src="images/cart_product_2.png" alt="" />
-                            </a>
-                            <span>
-                              <a href="#">Apple iPhone 6S </a>
-                            </span>
-                          </td>
-                          <td>$1300</td>
-                          <td>
-                            <div className="product-quantity">
-                              <div className="quantity">
-                                <input
-                                  type="number"
-                                  className="input-text qty text "
-                                  step="1"
-                                  min="1"
-                                  max="6"
-                                  name="quantity"
-                                  value="1"
-                                  title="Qty"
-                                  pattern="[0-9]*"
-                                />
-                              </div>
-                            </div>
-                          </td>
-                          <td>$1300.00</td>
-                          <th scope="row">
-                            <a href="#" className="btn-close">
-                              <i className="fa fa-times-circle-o"></i>
-                            </a>
-                          </th>
-                        </tr>
-                      </tbody>
+                      {cartItems ? (
+                        <>
+                          {cartItems.map((product, index) => (
+                            <tbody key={index}>
+                              <tr>
+                                <td>
+                                  <a href="#">
+                                    <img src={product.images[0]} alt="" />
+                                  </a>
+                                  <span>
+                                    <a href="#">{product.title}</a>
+                                  </span>
+                                </td>
+                                <td>${product.price}</td>
+                                <td>
+                                  <div className="product-quantity">
+                                    <div className="quantity">
+                                      <input
+                                        type="number"
+                                        className="input-text qty text"
+                                        step="1"
+                                        min="1"
+                                        max="6"
+                                        name="quantity"
+                                        value="1"
+                                        title="Qty"
+                                        pattern="[0-9]*"
+                                      />
+                                    </div>
+                                  </div>
+                                </td>
+                                <td>$1100.00</td>
+                                <th scope="row">
+                                  <a href="#" className="btn-close">
+                                    <i className="fa fa-times-circle-o"></i>
+                                  </a>
+                                </th>
+                              </tr>
+                            </tbody>
+                          ))}
+                        </>
+                      ) : (
+                        <p>Loading...</p>
+                      )}
                     </table>
                   </div>
                 </div>

@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { FullProductType, Product, ProductType } from "../../../../types";
-import { useSelector } from "react-redux";
-import { RootStateType } from "../../../../redux/store";
+
+import { addToCart } from "../../../../redux/actions/actions";
 import { useEffect } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { RootStateType } from "../../../../redux/store";
 
 export type RouteParamsType = {
   product_id: string;
 };
 
 const ProductDetailsComponent = () => {
+  const dispatch = useDispatch();
   const [data, setData] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const productState: ProductType = useSelector((state: RootStateType) => {
-    return state.products;
-  });
+  const cartItems = useSelector((state: RootStateType) => state.cart.items);
+  console.log("cart", cartItems);
   const params = useParams<RouteParamsType>();
-  console.log("params", params.product_id);
-  console.log("productState", productState);
+  //console.log("params", params.product_id);
+  //console.log("productState", productState);
   const productId = params.product_id;
 
   useEffect(() => {
@@ -48,6 +51,14 @@ const ProductDetailsComponent = () => {
     return <div>Product not found</div>;
   }
 
+  //SepeteEkle
+  const handleAddToCart = () => {
+    if (data) {
+      dispatch(addToCart(data));
+      // Sepete ürün eklendikten sonra isteğe bağlı olarak başka bir işlem yapabilirsiniz.
+    }
+  };
+
   return (
     <div className="content">
       <div className="container">
@@ -64,7 +75,7 @@ const ProductDetailsComponent = () => {
                           data-desoslide-index="0"
                         >
                           {data.images.map((i, k) => (
-                            <div className=" thumb-img">
+                            <div className=" thumb-img" key={k}>
                               <img src={i} alt="" />
                             </div>
                           ))}
@@ -156,7 +167,11 @@ const ProductDetailsComponent = () => {
                           />
                         </div>
                       </div>
-                      <button type="submit" className="btn btn-default">
+                      <button
+                        type="submit"
+                        className="btn btn-default"
+                        onClick={handleAddToCart}
+                      >
                         <i className="fa fa-shopping-cart"></i>&nbsp;Add to cart
                       </button>
                     </div>

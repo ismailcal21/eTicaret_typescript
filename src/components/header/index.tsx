@@ -1,6 +1,10 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootStateType } from "../../redux/store";
 
 function Header() {
+  const cartItems = useSelector((state: RootStateType) => state.cart.items);
+  console.log("cart2", cartItems);
   return (
     <>
       <div className="top-header">
@@ -69,7 +73,7 @@ function Header() {
                     <li>
                       <Link to="cart" className="title">
                         <i className="fa fa-shopping-cart"></i>
-                        <sup className="cart-quantity">1</sup>
+                        <sup className="cart-quantity">{cartItems.length}</sup>
                       </Link>
                     </li>
                   </ul>

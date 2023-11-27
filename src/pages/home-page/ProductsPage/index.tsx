@@ -11,13 +11,14 @@ import { useDispatch } from "react-redux";
 import { setProducts } from "../../../redux/reducers/productReducer";
 
 const ProductsPage = () => {
+  const [data, setData] = useState<ProductType | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null); //kategoriye gore siralama icin
+  const [sortOption, setSortOption] = useState<string | null>(null); // fiyata göre siralama icin
+
   const dispatch = useDispatch();
   const productState: ProductType = useSelector((state: RootStateType) => {
     return state.products;
   });
-
-  const [data, setData] = useState<ProductType | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +37,8 @@ const ProductsPage = () => {
     fetchData();
   }, []);
 
+  //Kategoriye gore siralama baslangic
+
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
   };
@@ -43,6 +46,22 @@ const ProductsPage = () => {
   const filteredProducts = selectedCategory
     ? data?.products.filter((product) => product.category === selectedCategory)
     : data?.products;
+
+  //kategoriye gore siralama son
+
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCategory(event.target.value);
+  };
+
+  const sortedProducts = () => {
+    if (sortOption === "Low Price") {
+      return data?.products.slice().sort((a, b) => a.price - b.price);
+    } else if (sortOption === "High Price") {
+      return data?.products.slice().sort((a, b) => b.price - a.price);
+    } else {
+      return data?.products;
+    }
+  };
 
   return (
     <>
@@ -53,6 +72,7 @@ const ProductsPage = () => {
               <div id="cssmenu">
                 <ul>
                   <li className="has-sub">
+                    <a onClick={() => handleCategoryClick("")}>All Products</a>
                     <a onClick={() => handleCategoryClick("smartphones")}>
                       Smart Phones
                     </a>
@@ -78,9 +98,13 @@ const ProductsPage = () => {
                 <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb10 alignright">
                   <form>
                     <div className="select-option form-group">
-                      <select name="select" className="form-control">
+                      <select
+                        name="select"
+                        className="form-control"
+                        onChange={handleSortChange}
+                      >
                         <option value="">Select</option>
-                        <option value="">Best Match</option>
+
                         <option value="">Low Price</option>
                         <option value="">High Price</option>
                       </select>
