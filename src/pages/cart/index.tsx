@@ -1,10 +1,17 @@
 import React from "react";
 import { RootStateType } from "../../redux/store";
 import { useSelector } from "react-redux";
+import { removeFromCart } from "../../redux/actions/actions";
+import { useDispatch } from "react-redux";
 
 const Cart = () => {
   const cartItems = useSelector((state: RootStateType) => state.cart.items);
+  //urun toplam fiyati
+  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+
   console.log("cart2", cartItems);
+  console.log("TOTALpRICE", totalPrice);
+  const dispatch = useDispatch();
   return (
     <>
       <div className="container">
@@ -66,10 +73,16 @@ const Cart = () => {
                                     </div>
                                   </div>
                                 </td>
-                                <td>$1100.00</td>
+                                <td>${totalPrice.toFixed(2)}</td>
                                 <th scope="row">
-                                  <a href="#" className="btn-close">
-                                    <i className="fa fa-times-circle-o"></i>
+                                  <a className="btn-close">
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        dispatch(removeFromCart(product.id));
+                                      }}
+                                      className="fa fa-times-circle-o"
+                                    ></button>
                                   </a>
                                 </th>
                               </tr>
@@ -100,9 +113,9 @@ const Cart = () => {
                       <tbody>
                         <tr>
                           <th>
-                            <span>Price (2 items)</span>
+                            <span>Price ({cartItems.length} items)</span>
                           </th>
-                          <td>$2400</td>
+                          <td> ${totalPrice.toFixed(2)}</td>
                         </tr>
                         <tr>
                           <th>
@@ -121,7 +134,7 @@ const Cart = () => {
                             </span>
                           </th>
                           <td style={{ fontWeight: "700", color: "#1c1e1e" }}>
-                            $2400
+                            ${totalPrice.toFixed(2)}
                           </td>
                         </tr>
                       </tbody>

@@ -72,7 +72,7 @@ const ProductsPage = () => {
               <div id="cssmenu">
                 <ul>
                   <li className="has-sub">
-                    <a onClick={() => handleCategoryClick("")}>All Products</a>
+                    <a onClick={() => handleCategoryClick("")}>All</a>
                     <a onClick={() => handleCategoryClick("smartphones")}>
                       Smart Phones
                     </a>
