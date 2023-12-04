@@ -1,7 +1,52 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { FormEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { setUser } from "../redux/reducers/authSlice";
+import { User } from "../types";
+// import { auth } from "../firebase";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogin = async (e: FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post<User>(
+        "https://dummyjson.com/auth/login",
+        {
+          username: email, // Assuming email is used as username
+          password: password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      // Assuming the response contains a token property
+      const token = response.data.token;
+      localStorage.setItem("token", token);
+      const user = response.data;
+      console.log("User", response.data);
+
+      // Store the user in the Redux store
+      dispatch(setUser({ user }));
+      navigate("/");
+
+      // Redirect or perform any other actions as needed after successful login
+    } catch (error) {
+      // Handle login error
+      console.error("Login failed", error);
+    }
+  };
+
   return (
     <>
       <div className="content">
@@ -14,7 +59,7 @@ const Login = () => {
                     <div className="col-lg-12 col-md-12 col-sm-6 col-xs-12 mb20">
                       <h3 className="mb10">Login</h3>
                     </div>
-                    <form>
+                    <form onSubmit={handleLogin}>
                       <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div className="form-group">
                           <label
@@ -24,10 +69,12 @@ const Login = () => {
                           <div className="login-input">
                             <input
                               id="email"
-                              name="emaol"
+                              name="email"
                               type="text"
                               className="form-control"
                               placeholder="Enter your email id"
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
                             />
                             <div className="login-icon">
                               <i className="fa fa-user"></i>
@@ -44,6 +91,8 @@ const Login = () => {
                               type="password"
                               className="form-control"
                               placeholder="******"
+                              value={password}
+                              onChange={(e) => setPassword(e.target.value)}
                             />
                             <div className="login-icon">
                               <i className="fa fa-lock"></i>
@@ -55,7 +104,11 @@ const Login = () => {
                         </div>
                       </div>
                       <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb20 ">
-                        <button className="button ">Login</button>
+                        <button className="button " type="submit">
+                          Login
+                        </button>
+
+                        <button className="button ">Register</button>
                         <div>
                           <p>
                             Don't you have an account?{" "}

@@ -33,6 +33,13 @@ export type Product = {
   images: string[]; // Buraya gerçek resim dizisi tipini eklemeniz gerekiyor (string[], URL[] vs.).
 };
 
-export type SingleProductType = {
-  products: Product[];
+export type User = {
+  email: string;
+  firstName: string;
+  gender: string;
+  id: number;
+  image: string;
+  lastName: string;
+  token: string;
+  username: string;
 };

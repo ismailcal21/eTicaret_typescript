@@ -1,10 +1,17 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { RootStateType } from "../../redux/store";
+import { removeUser } from "../../redux/reducers/authSlice";
+import { useDispatch } from "react-redux";
 
 function Header() {
+  const dispatch = useDispatch();
   const cartItems = useSelector((state: RootStateType) => state.cart.items);
   console.log("cart2", cartItems);
+
+  const authState = useSelector((state: RootStateType) => state.auth);
+  console.log("authState", authState);
+
   return (
     <>
       <div className="top-header">
@@ -59,17 +66,44 @@ function Header() {
               <div className="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div className="account-section">
                   <ul>
-                    <li>
-                      <Link to="login" className="title hidden-xs">
-                        Login
-                      </Link>
-                    </li>
-                    <li className="hidden-xs">|</li>
-                    <li>
-                      <Link to="register" className="title hidden-xs">
-                        Register
-                      </Link>
-                    </li>
+                    {authState.user ? (
+                      <>
+                        <>
+                          <img
+                            src={authState.user.image}
+                            style={{ width: "40px" }}
+                            alt=""
+                          />
+                          <li>{authState.user.username}</li>
+                        </>
+
+                        <li className="hidden-xs">|</li>
+                        <li>
+                          <Link
+                            to=""
+                            onClick={() => dispatch(removeUser())}
+                            className="title hidden-xs"
+                          >
+                            Logout
+                          </Link>
+                        </li>
+                      </>
+                    ) : (
+                      <>
+                        <li>
+                          <Link to="login" className="title hidden-xs">
+                            Login
+                          </Link>
+                        </li>
+                        <li className="hidden-xs">|</li>
+                        <li>
+                          <Link to="register" className="title hidden-xs">
+                            Register
+                          </Link>
+                        </li>
+                      </>
+                    )}
+
                     <li>
                       <Link to="cart" className="title">
                         <i className="fa fa-shopping-cart"></i>
