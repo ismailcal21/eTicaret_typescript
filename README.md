@@ -1,4 +1,4 @@
-<img src="gif.gif" width:"500px", height:"500px" />
+<img src="gif.gif" width="500px", height="500px" />
 
 # Burdaki stilleri kullanmak icin index.html dosyasinin icinde olan seylerin hepsini kendi projene dahil et
 
